@@ -1,12 +1,13 @@
 # BarCast Research
 
-A small Expo and React Native app. Enter a sample bar name, choose a crowd level, and submit it to the report list. Reports reset on reload.
+A React Native and Expo crowd-reporting demo. Reports reset on reload.
 
-Requires Node.js 22.13 or newer.
+Run the browser preview with Node.js 22.13+ and Python 3:
 
 ```sh
 npm install
-npm run web
+npm run build
+python3 -m http.server 8082 --bind 127.0.0.1 --directory dist
 ```
 
-If the development server reports `EMFILE`, run `npm run build`, then `python3 -m http.server 8082 --bind 127.0.0.1 --directory dist`. Open http://127.0.0.1:8082.
+Open http://127.0.0.1:8082 and leave the terminal running.
