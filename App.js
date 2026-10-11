@@ -5,9 +5,16 @@ export default function App() {
   const [barName, setBarName] = useState('');
   const [crowd, setCrowd] = useState('Quiet');
   const [reports, setReports] = useState([]);
+  const [error, setError] = useState('');
 
   function addReport() {
-    setReports([...reports, { barName, crowd }]);
+    const name = barName.trim();
+    if (!name) {
+      setError('Enter a bar name.');
+      return;
+    }
+    setReports([...reports, { barName: name, crowd }]);
+    setError('');
     setBarName('');
   }
 
@@ -19,6 +26,7 @@ export default function App() {
       <TextInput
         accessibilityLabel="Bar name"
         style={styles.input}
+        maxLength={60}
         value={barName}
         onChangeText={setBarName}
       />
@@ -29,6 +37,7 @@ export default function App() {
         ))}
       </View>
       <Button title="Submit report" onPress={addReport} />
+      {error !== '' && <Text accessibilityRole="alert">{error}</Text>}
       <Text style={styles.heading}>Reports ({reports.length})</Text>
       {reports.length === 0 && <Text>No reports yet.</Text>}
       {reports.map((report, index) => (
